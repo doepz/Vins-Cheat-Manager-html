@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vins Cheat Manager</title>
+  <style>
+    :root {
+      --primary-color: #4a4a4a;
+      --accent-color: #5c5c5c;
+      --hover-color: #7a7a7a;
+      --bg-light: #1e1e1e;
+      --bg-grey: #2b2b2b;
+      --bg-gradient: linear-gradient(135deg, #292929, #1e1e1e);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    * {
+      box-sizing: border-box;
+      transition: all 0.4s ease-in-out;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--bg-light);
+      color: #f2f2f2;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-in-up {
+      animation: fadeInUp 0.8s ease forwards;
+    }
+
+    header {
+      background-color: var(--primary-color);
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+      letter-spacing: 0.5px;
+      font-weight: 600;
+    }
+
+    .header-links {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .header-links a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1rem;
+    }
+
+    .header-links a:hover {
+      color: #ddd;
+    }
+
+    .hero {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      padding: 5rem 2rem;
+      background: var(--bg-gradient);
+    }
+
+    .hero-text {
+      flex: 1;
+      min-width: 300px;
+      padding-right: 2rem;
+      text-align: left;
+      opacity: 0;
+      animation: fadeInUp 1s ease forwards;
+      animation-delay: 0.3s;
+    }
+
+    .hero-text h2 {
+      font-size: 2.6rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+      color: #f0f0f0;
+    }
+
+    .hero-text p {
+      font-size: 1.25rem;
+      margin-bottom: 2rem;
+      color: #ccc;
+      font-weight: 500;
+    }
+
+    .download-btn {
+      display: inline-block;
+      text-align: center;
+      text-decoration: none;
+      background-color: var(--accent-color);
+      color: white;
+      padding: 0.9rem 1.8rem;
+      font-size: 1rem;
+      border-radius: 8px;
+    }
+
+    .download-btn:hover {
+      background-color: var(--hover-color);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .hero-image {
+      flex: 1;
+      min-width: 300px;
+      text-align: center;
+      opacity: 0;
+      animation: fadeInUp 1s ease forwards;
+      animation-delay: 0.6s;
+    }
+
+    .hero-image img {
+      max-width: 100%;
+      width: 200px;
+      border-radius: 12px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .hero-image .image-caption {
+      margin-top: 1rem;
+      font-size: 1rem;
+      color: #999;
+      font-weight: 500;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      padding: 4rem 2rem;
+      background-color: var(--bg-grey);
+    }
+
+    .feature {
+      background-color: #333;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+      opacity: 0;
+      animation: fadeInUp 0.8s ease forwards;
+    }
+
+    .feature:nth-child(1) { animation-delay: 0.2s; }
+    .feature:nth-child(2) { animation-delay: 0.4s; }
+    .feature:nth-child(3) { animation-delay: 0.6s; }
+    .feature:nth-child(4) { animation-delay: 0.8s; }
+
+    .feature:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    .feature h3 {
+      margin-top: 0;
+      color: #e0e0e0;
+      font-weight: 600;
+    }
+
+    .feature p {
+      color: #bbb;
+    }
+
+    #changelog {
+      padding: 4rem 2rem;
+      background-color: #2a2a2a;
+      opacity: 0;
+      animation: fadeInUp 1s ease forwards;
+      animation-delay: 1s;
+    }
+
+    #changelog h2 {
+      text-align: center;
+      font-size: 2rem;
+      color: #e0e0e0;
+    }
+
+    #changelog ul {
+      max-width: 800px;
+      margin: 2rem auto;
+      font-size: 1.1rem;
+      color: #ccc;
+    }
+
+    footer {
+      background-color: var(--primary-color);
+      color: white;
+      text-align: center;
+      padding: 2rem 1rem;
+      font-size: 0.95rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Vins Cheat Manager</h1>
+    <div class="header-links">
+      <a href="#changelog">Changelog</a>
+      <a href="https://github.com/vin-2-real" target="_blank">GitHub (Vin)</a>
+      <a href="https://github.com/doepz" target="_blank">GitHub (Doepz)</a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-text">
+      <h2>One manager, for all of your exploits.</h2>
+      <p>Download and manage tools for Roblox, CS2, Fortnite, and more — all in one place.</p>
+      <a href="https://github.com/doepz/Vins-Cheat-Manager-0.9/tree/main" class="download-btn" target="_blank">Download Now</a>
+    </div>
+    <div class="hero-image">
+      <img src="https://github.com/doepz/image/blob/main/VCM.png?raw=true" alt="App Preview" />
+      <div class="image-caption">Developed By Vin</div>
+    </div>
+  </section>
+
+  <section class="features">
+    <div class="feature">
+      <h3>Game Compatibility</h3>
+      <p>Supports a wide range of popular games with regular updates.</p>
+    </div>
+    <div class="feature">
+      <h3>Safe & Secure</h3>
+      <p>Built with safety in mind. Keep your tools managed and up-to-date.</p>
+    </div>
+    <div class="feature">
+      <h3>Update Easy</h3>
+      <p>Get notified every time a new update is released through the discord.</p>
+    </div>
+    <div class="feature">
+      <h3>Simple UI</h3>
+      <p>Minimal and clean design for ease of use.</p>
+    </div>
+  </section>
+
+  <section id="changelog">
+    <h2>Changelog</h2>
+    <ul>
+      <li>v1.0.0 - Initial release with multi-game support.</li>
+      <li>Added GitHub download link support.</li>
+      <li>Improved UI and animations.</li>
+    </ul>
+  </section>
+
+  <footer>
+    <p>2025 Vins Cheat Manager. All rights reserved.</p>
+    <p>Website developed by doepz, Software developed by pzny.</p>
+  </footer>
+</body>
+
+</html>
